@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembuat Prompt Sempurna AI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Font Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style untuk multi-select dropdown */
+        select[multiple] {
+            height: auto; /* Allow height to adjust based on options */
+            min-height: 120px; /* Minimum height for better visibility */
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl transform transition-all duration-300 hover:scale-105">
+        <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Pembuat Prompt AI Interaktif</h1>
+        <p class="text-gray-600 text-center mb-8">
+            Buat prompt yang sempurna untuk AI Anda. Prompt akan merujuk ke dokumen yang Anda kirim, dan Anda bisa memilih detailnya dari dropdown.
+        </p>
+
+        <div class="space-y-6">
+            <!-- Peran Anda (Dropdown) -->
+            <div>
+                <label for="yourRole" class="block text-sm font-medium text-gray-700 mb-1">Peran Anda sebagai audiens:</label>
+                <select id="yourRole"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm transition duration-150 ease-in-out">
+                    <option value="audiens umum">Audiens Umum</option>
+                    <option value="mahasiswa">Mahasiswa</option>
+                    <option value="pakar di bidang ini">Pakar di Bidang Ini</option>
+                    <option value="calon investor">Calon Investor</option>
+                    <option value="kolega/rekan kerja">Kolega/Rekan Kerja</option>
+                    <option value="manajer/pimpinan tim">Manajer/Pimpinan Tim</option>
+                    <option value="klien potensial">Klien Potensial</option>
+                    <option value="pengembang">Pengembang</option>
+                </select>
+            </div>
+
+            <!-- Tujuan Pertanyaan (Dropdown) -->
+            <div>
+                <label for="questionPurpose" class="block text-sm font-medium text-gray-700 mb-1">Tujuan Anda dari AI (Jenis pertanyaan yang diinginkan):</label>
+                <select id="questionPurpose"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm transition duration-150 ease-in-out">
+                    <option value="membuat pertanyaan mendalam dan relevan">Membuat pertanyaan mendalam dan relevan</option>
+                    <option value="mengidentifikasi kelemahan argumen atau area yang kurang jelas">Mengidentifikasi kelemahan argumen atau area yang kurang jelas</option>
+                    <option value="mencari peluang kolaborasi atau solusi inovatif">Mencari peluang kolaborasi atau solusi inovatif</option>
+                    <option value="memverifikasi fakta dan data yang disajikan">Memverifikasi fakta dan data yang disajikan</option>
+                    <option value="memahami konsep yang kompleks dengan lebih baik">Memahami konsep yang kompleks dengan lebih baik</option>
+                    <option value="memberikan umpan balik konstruktif">Memberikan umpan balik konstruktif</option>
+                    <option value="mengeksplorasi implikasi masa depan atau skenario lanjutan">Mengeksplorasi implikasi masa depan atau skenario lanjutan</option>
+                    <option value="menganalisis tren dan pola">Menganalisis tren dan pola</option>
+                    <option value="mengidentifikasi potensi risiko atau tantangan">Mengidentifikasi potensi risiko atau tantangan</option>
+                    <option value="mengembangkan rekomendasi tindakan">Mengembangkan rekomendasi tindakan</option>
+                    <option value="membandingkan dan mengkontraskan ide/solusi">Membandingkan dan mengkontraskan ide/solusi</option>
+                    <option value="menilai kelayakan atau dampak">Menilai kelayakan atau dampak</option>
+                    <option value="menghasilkan ide-ide baru atau brainstorming">Menghasilkan ide-ide baru atau brainstorming</option>
+                    <option value="mengevaluasi strategi yang disajikan">Mengevaluasi strategi yang disajikan</option>
+                </select>
+            </div>
+
+            <!-- Gaya Pertanyaan (Multi-select Dropdown) -->
+            <div>
+                <label for="questionStyle" class="block text-sm font-medium text-gray-700 mb-1">Gaya Pertanyaan (Pilih satu atau lebih):</label>
+                <select id="questionStyle" multiple
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm transition duration-150 ease-in-out">
+                    <option value="klarifikasi">Klarifikasi</option>
+                    <option value="kritis">Kritis</option>
+                    <option value="eksploratif">Eksploratif</option>
+                    <option value="solusi-oriented">Solusi-Oriented</option>
+                    <option value="strategis">Strategis</option>
+                    <option value="taktis">Taktis</option>
+                    <option value="berbasis bukti">Berbasis Bukti</option>
+                    <option value="inovatif">Inovatif</option>
+                    <option value="pertanyaan terbuka">Pertanyaan Terbuka</option>
+                    <option value="analitis">Analitis</option>
+                </select>
+                <p class="text-xs text-gray-500 mt-1">Tekan Ctrl/Cmd untuk memilih beberapa opsi.</p>
+            </div>
+
+            <!-- Instruksi Tambahan (Textarea) -->
+            <div>
+                <label for="additionalInstructions" class="block text-sm font-medium text-gray-700 mb-1">Instruksi Tambahan untuk AI (Opsional):</label>
+                <textarea id="additionalInstructions" rows="3" placeholder="Misalnya: 'Berikan 5 pertanyaan saja', 'Fokus pada bagian X atau Y', 'Gunakan bahasa yang sederhana'"
+                          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm transition duration-150 ease-in-out resize-y"></textarea>
+            </div>
+
+            <!-- Tombol Generate Prompt -->
+            <button id="generatePromptBtn"
+                    class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 px-6 rounded-md shadow-lg hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transform transition-all duration-200 hover:scale-105">
+                Buat Prompt
+            </button>
+        </div>
+
+        <!-- Output Prompt -->
+        <div class="mt-8 bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-inner">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Prompt Anda:</h2>
+            <div id="outputPrompt" class="bg-gray-100 p-4 rounded-md text-gray-800 text-sm break-words whitespace-pre-wrap min-h-[80px] flex items-center justify-center text-center">
+                Prompt yang dihasilkan akan muncul di sini.
+            </div>
+            <button id="copyPromptBtn"
+                    class="mt-4 w-full bg-green-500 text-white font-bold py-2 px-4 rounded-md shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transform transition-all duration-200 hover:scale-105">
+                Salin Prompt
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center text-gray-500 text-sm">
+            Dibuat oleh Ulin Kt
+        </div>
+
+        <!-- Message Box for Alerts -->
+        <div id="messageBox" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
+            <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-sm w-full">
+                <p id="messageText" class="text-lg text-gray-800 mb-4"></p>
+                <button id="closeMessageBox" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Oke</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan pesan di kotak pesan kustom
+        function showMessage(message) {
+            const messageBox = document.getElementById('messageBox');
+            const messageText = document.getElementById('messageText');
+            messageText.textContent = message;
+            messageBox.classList.remove('hidden');
+        }
+
+        // Fungsi untuk menyembunyikan kotak pesan
+        document.getElementById('closeMessageBox').addEventListener('click', () => {
+            document.getElementById('messageBox').classList.add('hidden');
+        });
+
+        document.getElementById('generatePromptBtn').addEventListener('click', () => {
+            const role = document.getElementById('yourRole').value; // Mengambil nilai dari dropdown
+            const purpose = document.getElementById('questionPurpose').value; // Mengambil nilai dari dropdown
+
+            // Mengambil nilai dari multi-select dropdown untuk gaya pertanyaan
+            const styleSelect = document.getElementById('questionStyle');
+            const selectedStyles = Array.from(styleSelect.options)
+                                      .filter(option => option.selected)
+                                      .map(option => option.value);
+            const additional = document.getElementById('additionalInstructions').value.trim();
+            const outputPromptDiv = document.getElementById('outputPrompt');
+
+            let prompt = `Sesuai dokumen yang saya kirim, saya bertindak sebagai **${role}** dalam presentasi ini.`;
+            prompt += ` Tujuan utama saya adalah **${purpose}**.`;
+            prompt += ` Mohon bantu saya membuat pertanyaan yang spesifik dan relevan berdasarkan isi dokumen.`;
+
+            if (selectedStyles.length > 0) {
+                prompt += ` Gaya pertanyaan yang saya inginkan adalah: ${selectedStyles.join(', ')}.`;
+            }
+
+            if (additional) {
+                prompt += ` ${additional}`;
+            }
+
+            // Menambahkan instruksi untuk membuat prompt lebih sempurna
+            prompt += ` Pastikan pertanyaan Anda:
+- Sangat relevan dan didukung oleh isi dokumen.
+- Membantu saya memahami lebih dalam atau mengidentifikasi poin-poin kunci.
+- Sesuai dengan peran saya sebagai ${role} dan tujuan saya untuk ${purpose}.
+- Jika ada gaya spesifik yang diminta, ikuti gaya tersebut dengan konsisten.
+- Hindari pertanyaan yang sudah jelas atau mudah ditemukan jawabannya langsung di dokumen.
+- Fokus pada analisis, implikasi, atau tantangan/solusi.`;
+
+            outputPromptDiv.textContent = prompt;
+        });
+
+        document.getElementById('copyPromptBtn').addEventListener('click', () => {
+            const promptText = document.getElementById('outputPrompt').textContent;
+            if (promptText === "Prompt yang dihasilkan akan muncul di sini.") {
+                showMessage("Tidak ada prompt untuk disalin. Silakan buat prompt terlebih dahulu.");
+                return;
+            }
+
+            // Fallback for document.execCommand('copy')
+            const textarea = document.createElement('textarea');
+            textarea.value = promptText;
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-9999px'; // Sembunyikan textarea dari tampilan
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                const msg = successful ? 'Prompt berhasil disalin!' : 'Gagal menyalin prompt.';
+                showMessage(msg);
+            } catch (err) {
+                console.error('Gagal menyalin:', err);
+                showMessage('Terjadi kesalahan saat menyalin prompt. Silakan coba lagi secara manual.');
+            } finally {
+                document.body.removeChild(textarea); // Hapus textarea setelah digunakan
+            }
+        });
+    </script>
+</body>
+</html>
